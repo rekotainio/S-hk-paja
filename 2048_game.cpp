@@ -118,10 +118,15 @@ void insertToRandomPosition() { // Initialize the 4x4 board with zeros
 
 void gameOver() {
   for(int i=0; i<10; i++){
+    for(int i=0; i<LED_COUNT; i++){
+      colors[i] = {rgb_color(255,0,0)};
+    }
     ledStrip.write(colors, LED_COUNT);
-    colors[LED_COUNT] = {rgb_color(255,0,0)};
     delay(100);
-    colors[LED_COUNT] = {rgb_color(255,255,255)};
+    for(int i=0; i<LED_COUNT; i++){
+      colors[i] = {rgb_color(255,255,255)};
+    }
+    ledStrip.write(colors, LED_COUNT);
     delay(100);
       }
   for (int i = 0; i < 4; ++i) {
@@ -226,22 +231,22 @@ void loop() {
   if (buttonState2 == HIGH) {
     // turn LED on:
     moveUp();
-    delay(500);
+    delay(300);
     //Serial.print("");
   } else if (buttonState3 == HIGH) {
     // turn LED on:
     moveRight();
-    delay(500);
+    delay(300);
     //Serial.print("");
   }else if (buttonState4 == HIGH) {
     // turn LED on:
     moveDown();
-    delay(500);
+    delay(300);
     //Serial.print("");
   } else if (buttonState5 == HIGH) {
     // turn LED on:
     moveLeft();
-    delay(500);
+    delay(300);
     //Serial.print("");
   }{
     // turn LED off:
