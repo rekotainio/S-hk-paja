@@ -148,10 +148,10 @@ void flattenBoard(){
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
             int baseIndex = 16 * i;
-            newBoard[baseIndex + 2 * j] = board[i][j];
-            newBoard[baseIndex + 2 * j + 1] = board[i][j];
-            newBoard[baseIndex + 15 - 2 * j] = board[i][j];
-            newBoard[baseIndex + 14 - 2 * j] = board[i][j];
+            newBoard[baseIndex + 2 * j] = board[i][3-j];
+            newBoard[baseIndex + 2 * j + 1] = board[i][3-j];
+            newBoard[baseIndex + 15 - 2 * j] = board[i][3-j];
+            newBoard[baseIndex + 14 - 2 * j] = board[i][3-j];
         }
     }
 }
