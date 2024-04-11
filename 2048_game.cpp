@@ -24,7 +24,7 @@ int pushButton5 = 5; // left
 int board[4][4] = {0};
 //int mirrorBoard[4][4] = {0};
 int newBoard[LED_COUNT];
-rgb_color colors[LED_COUNT];
+rgb_color colors[LED_COUNT]; // = {rgb_color(255,255,255)};
 PololuLedStrip<12> ledStrip;
 
 void setup() {
@@ -67,9 +67,37 @@ void mirrorVertical() {
         }
     }
 }*/
+void testLed() {
+  for (int i=0; i<LED_COUNT; ++i){
+    colors[i] = rgb_color(255,255,255);
+  }
+  ledStrip.write(colors, LED_COUNT);
+}
+
+void testBoard() {
+  int a = 2;
+  for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            board[i][j] = a;
+            a = a * 2;
+            }
+    
+    }
+    ledStrip.write(colors, LED_COUNT);
+}
 
 void insertToRandomPosition() { // Initialize the 4x4 board with zeros
-
+    bool isOver = true;
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            if(board[i][j] == 0){
+              isOver = false;              
+            }
+         }
+      }
+  if(isOver){
+    gameOver();
+  }             
     //srand(time(NULL));
     srand(millis());
 
@@ -86,6 +114,22 @@ void insertToRandomPosition() { // Initialize the 4x4 board with zeros
     printBoard();
     ledStrip.write(colors, LED_COUNT);
 
+}
+
+void gameOver() {
+  for(int i=0; i<10; i++){
+    ledStrip.write(colors, LED_COUNT);
+    colors[LED_COUNT] = {rgb_color(255,0,0)};
+    delay(100);
+    colors[LED_COUNT] = {rgb_color(255,255,255)};
+    delay(100);
+      }
+  for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            board[i][j] = 0;
+            }
+    
+    }
 }
 
 void swap(int r1, int c1, int r2, int c2) {
@@ -110,15 +154,40 @@ void flattenBoard(){
 void vectorToColors(){
   for (int i = 0; i < LED_COUNT; ++i) {
     if(newBoard[i] == 2){
-      colors[LED_COUNT - 1 - i] = rgb_color(255,0,0);
+      colors[LED_COUNT - 1 - i] = rgb_color(221,255,0);
     }
     if(newBoard[i] == 4){
-      colors[LED_COUNT - 1 - i] = rgb_color(0,255,0);
+      colors[LED_COUNT - 1 - i] = rgb_color(82,255,0);
     }
     if(newBoard[i] == 8){
-      colors[LED_COUNT - 1 - i] = rgb_color(0,0,255);
+      colors[LED_COUNT - 1 - i] = rgb_color(0,255,57);
     }
-    if(newBoard[i] != 2 && newBoard[i] != 4 && newBoard[i] != 8){
+    if(newBoard[i] == 16){
+      colors[LED_COUNT - 1 - i] = rgb_color(0,255,196);
+    }
+    if(newBoard[i] == 32){
+      colors[LED_COUNT - 1 - i] = rgb_color(0,175,255);
+    }
+    if(newBoard[i] == 64){
+      colors[LED_COUNT - 1 - i] = rgb_color(0,36,255);
+    }
+        if(newBoard[i] == 128){
+      colors[LED_COUNT - 1 - i] = rgb_color(104,0,255);
+    }
+    if(newBoard[i] == 256){
+      colors[LED_COUNT - 1 - i] = rgb_color(243,0,255);
+    }
+    if(newBoard[i] == 512){
+      colors[LED_COUNT - 1 - i] = rgb_color(255,0,128);
+    }
+    if(newBoard[i] == 1024){
+      colors[LED_COUNT - 1 - i] = rgb_color(255,11,0);
+    }
+    if(newBoard[i] == 2048){
+      colors[LED_COUNT - 1 - i] = rgb_color(255,150,0);
+    }
+
+    if(newBoard[i] == 0){
       colors[LED_COUNT - 1 - i] = rgb_color(0,0,0);
     }
   }
@@ -144,12 +213,15 @@ void vectorToColors(){
 
 void loop() {
   
+  //testLed();
+  //testBoard();
 
   int buttonState2 = digitalRead(pushButton2); //up
   int buttonState3 = digitalRead(pushButton3); // right
   int buttonState4 = digitalRead(pushButton4); // down
   int buttonState5 = digitalRead(pushButton5); // left
 
+  
   // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
   if (buttonState2 == HIGH) {
     // turn LED on:
