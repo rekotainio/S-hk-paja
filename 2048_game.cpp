@@ -159,22 +159,22 @@ void flattenBoard(){
 void vectorToColors(){
   for (int i = 0; i < LED_COUNT; ++i) {
     if(newBoard[i] == 2){
-      colors[LED_COUNT - 1 - i] = rgb_color(230,25,75);
+      colors[LED_COUNT - 1 - i] = rgb_color(230,25,25);
     }
     if(newBoard[i] == 4){
-      colors[LED_COUNT - 1 - i] = rgb_color(245,130,48);
+      colors[LED_COUNT - 1 - i] = rgb_color(200,110,0);
     }
     if(newBoard[i] == 8){
       colors[LED_COUNT - 1 - i] = rgb_color(255,225,25);
     }
     if(newBoard[i] == 16){
-      colors[LED_COUNT - 1 - i] = rgb_color(210,245,60);
+      colors[LED_COUNT - 1 - i] = rgb_color(150,245,60);
     }
     if(newBoard[i] == 32){
-      colors[LED_COUNT - 1 - i] = rgb_color(60,180,75);
+      colors[LED_COUNT - 1 - i] = rgb_color(0,255,0);
     }
     if(newBoard[i] == 64){
-      colors[LED_COUNT - 1 - i] = rgb_color(70,240,240);
+      colors[LED_COUNT - 1 - i] = rgb_color(60,180,75);
     }
         if(newBoard[i] == 128){
       colors[LED_COUNT - 1 - i] = rgb_color(0,130,200);
